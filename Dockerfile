@@ -1,47 +1,15 @@
-FROM golang:1.16-alpine3.14 AS base
-RUN apk add --update-cache --no-cache \
-        git \
-        make \
-        gcc \
-        pkgconf \
-        musl-dev \
-        btrfs-progs \
-        btrfs-progs-dev \
-        libassuan-dev \
-        lvm2-dev \
-        device-mapper \
-        glib-static \
-        libc-dev \
-        gpgme-dev \
-        protobuf-dev \
-        protobuf-c-dev \
-        libseccomp-dev \
-        libseccomp-static \
-        libselinux-dev \
-        ostree-dev \
-        openssl \
-        iptables \
-        bash \
-        go-md2man
-
-FROM base AS crun
-RUN apk add --update-cache --no-cache \
-        autoconf \
-        automake \
-        libtool
+FROM nix AS crun
 # renovate: datasource=github-releases depName=containers/crun
 ARG CRUN_VERSION=1.3
 WORKDIR /crun
 RUN test -n "${CRUN_VERSION}" \
  && git clone --config advice.detachedHead=false --depth 1 --branch "${CRUN_VERSION}" \
         https://github.com/containers/crun.git .
-RUN ./autogen.sh \
- && ./configure \
- && make \
-        PKG_CONFIG='pkg-config --static' \
-        CFLAGS='-std=c99 -Os -Wall -Wextra -Werror -static' \
-        LDFLAGS='-s -w -static' \
- && make install
+RUN mkdir -p /usr/local/share/man/man1 \
+ && nix build -f nix \
+ && cp -rfp ./result/bin/buildah /usr/local/bin/ \
+ && mv docs/*.1 /usr/local/share/man/man1
 
 FROM scratch AS local
 COPY --from=crun /usr/local/bin/crun .
+COPY --from=crun /usr/local/share/man ./share/man/
