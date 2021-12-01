@@ -8,7 +8,7 @@ RUN test -n "${CRUN_VERSION}" \
 RUN mkdir -p /usr/local/share/man/man1 \
  && nix build -f nix \
  && cp -rfp ./result/bin/crun /usr/local/bin/ \
- && cp docs/*.1 /usr/local/share/man/man1/
+ && cp *.1 /usr/local/share/man/man1/
 
 FROM scratch AS local
 COPY --from=crun /usr/local/bin/crun .
