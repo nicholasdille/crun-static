@@ -7,7 +7,7 @@ RUN test -n "${CRUN_VERSION}" \
         https://github.com/containers/crun.git .
 RUN mkdir -p /usr/local/share/man/man1 \
  && nix build -f nix \
- && cp -rfp ./result/bin/buildah /usr/local/bin/ \
+ && cp -rfp ./result/bin/crun /usr/local/bin/ \
  && mv docs/*.1 /usr/local/share/man/man1
 
 FROM scratch AS local
