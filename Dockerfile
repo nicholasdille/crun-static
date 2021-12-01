@@ -11,5 +11,5 @@ RUN mkdir -p /usr/local/share/man/man1 \
  && cp *.1 /usr/local/share/man/man1/
 
 FROM scratch AS local
-COPY --from=crun /usr/local/bin/crun .
+COPY --from=crun /usr/local/bin/crun ./bin/
 COPY --from=crun /usr/local/share/man ./share/man/
