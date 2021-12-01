@@ -3,7 +3,7 @@ FROM nix AS crun
 ARG CRUN_VERSION=1.3
 WORKDIR /crun
 RUN test -n "${CRUN_VERSION}" \
- && git clone --config advice.detachedHead=false --depth 1 --branch "${CRUN_VERSION}" \
+ && git clone --config advice.detachedHead=false --depth 1 --recursive --branch "${CRUN_VERSION}" \
         https://github.com/containers/crun.git .
 RUN mkdir -p /usr/local/share/man/man1 \
  && nix build -f nix \
