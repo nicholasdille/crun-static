@@ -43,16 +43,14 @@
 
   "packageRules": [
     {
-      "updateTypes": ["pin", "digest", "patch"],
+      "updateTypes": ["pin", "digest", "patch", "minor", "major"],
       "automerge": true
     },
     {
       "matchPackageNames": [
         "containers/crun"
       ],
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)(\\.(?<patch>\\d+))?$",
-      "updateTypes": ["pin", "digest", "patch", "minor", "major"],
-      "automerge": true
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)(\\.(?<patch>\\d+))?$"
     }
   ]
 }
