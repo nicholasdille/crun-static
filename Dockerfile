@@ -1,4 +1,4 @@
-FROM nix AS crun
+FROM nixos/nix:2.9.2 AS crun
 # renovate: datasource=github-releases depName=containers/crun
 ARG CRUN_VERSION=1.4.5
 WORKDIR /crun
