@@ -1,6 +1,6 @@
 FROM nixos/nix:2.9.2 AS crun
 # renovate: datasource=github-releases depName=containers/crun
-ARG CRUN_VERSION=1.4.5
+ARG CRUN_VERSION=1.5
 WORKDIR /crun
 RUN test -n "${CRUN_VERSION}" \
  && git clone --config advice.detachedHead=false --depth 1 --recursive --branch "${CRUN_VERSION}" \
