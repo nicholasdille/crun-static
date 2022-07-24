@@ -1,4 +1,4 @@
-#syntax=docker/dockerfile:1.4.0
+#syntax=docker/dockerfile:1.4.2
 
 FROM nixos/nix:2.9.2@sha256:c79d2fa0092680d2337c461bde48b2e2d6610872c0c7b0a903d3d75dfcbe83df AS crun
 # renovate: datasource=github-releases depName=containers/crun
