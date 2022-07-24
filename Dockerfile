@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.0
+
 FROM nixos/nix:2.9.2 AS crun
 # renovate: datasource=github-releases depName=containers/crun
 ARG CRUN_VERSION=1.5
